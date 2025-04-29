@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Indian Hotels | HotelVisit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gold: #f59e0b;
+            --green: #10b981;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Header */
+        .main-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Hotel Cards */
+        .hotel-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 30px;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .hotel-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hotel-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hotel-card:hover .hotel-img img {
+            transform: scale(1.05);
+        }
+        
+        .hotel-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .eco-badge {
+            background: var(--green);
+        }
+        
+        .hotel-body {
+            padding: 20px;
+        }
+        
+        .hotel-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    
+    /* Standard for line clamping */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    
+    /* Fallback for non-WebKit browsers */
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-line-clamp: 2;
+    
+    /* Modern standard (still needs WebKit prefix) */
+    display: box;
+    line-clamp: 2;
+    box-orient: vertical;
+    
+    /* Ensure proper sizing */
+    max-width: 100%;
+    min-height: 3em; /* Approximate height for 2 lines */
+}
+        
+        .hotel-location {
+            color: var(--gray);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        
+        .hotel-location i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        .rating {
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .amenity {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .price span {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Pagination */
+        .pagination {
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .page-item.active .page-link {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .page-link {
+            color: var(--primary);
+        }
+        
+        /* Hotel Page */
+        .hotel-page {
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 80px 0;
+            }
+            
+            .filter-section {
+                position: static;
+            }
+            
+            .hotel-img {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <h1>Luxury Hotels in India</h1>
+            <p class="lead">Discover exquisite hospitality at India's finest properties</p>
+        </div>
+    </header>
+
+    <!-- Main Hotels Page -->
+    <div id="mainPage" class="container hotel-page">
+        <div class="row">
+            <!-- Filter Sidebar -->
+            <div class="col-lg-3">
+                <div class="filter-section">
+                    <h5 class="filter-title"><i class="fas fa-sliders-h me-2"></i>Filters</h5>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Destination</label>
+                        <select id="destinationFilter" class="form-select">
+                            <option value="all" selected>All India</option>
+                            <option value="rajasthan">Rajasthan</option>
+                            <option value="kerala">Kerala</option>
+                            <option value="himachal">Himachal Pradesh</option>
+                            <option value="goa">Goa</option>
+                            <option value="up">Uttar Pradesh</option>
+                            <option value="maharashtra">Maharashtra</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Price Range</label>
+                        <select id="priceFilter" class="form-select">
+                            <option value="all" selected>Any Price</option>
+                            <option value="0-10000">Under ₹10,000</option>
+                            <option value="10000-20000">₹10,000 - ₹20,000</option>
+                            <option value="20000-30000">₹20,000 - ₹30,000</option>
+                            <option value="30000-50000">₹30,000 - ₹50,000</option>
+                            <option value="50000+">Over ₹50,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Star Rating</label>
+                        <div class="form-check">
+                            <input class="form-check-input rating-filter" type="checkbox" id="rating5" value="5">
+                            <label class="form-check-label" for="rating5">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input rating-filter" type="checkbox" id="rating4" value="4">
+                            <label class="form-check-label" for="rating4">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i> & Up
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button id="applyFilters" class="btn btn-primary w-100">Apply Filters</button>
+                    <button id="resetFilters" class="btn btn-outline-primary w-100 mt-2">Reset</button>
+                </div>
+            </div>
+            
+            <!-- Hotel Listings -->
+            <div class="col-lg-9">
+                <div id="hotelContainer" class="row">
+                    <!-- Hotels will be loaded here by JavaScript -->
+                </div>
+                
+                <!-- Pagination -->
+                <nav aria-label="Hotel pagination">
+                    <ul id="pagination" class="pagination">
+                        <!-- Pagination will be generated by JavaScript -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotel Detail Page -->
+    <div id="detailPage" class="container hotel-page">
+        <button id="backButton" class="btn btn-outline-primary mb-4">
+            <i class="fas fa-arrow-left me-2"></i> Back to Hotels
+        </button>
+        
+        <div id="hotelDetail" class="row">
+            <!-- Hotel details will be loaded here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hotel Data - in a real app this would come from an API
+        const hotels = [
+            {
+                id: 1,
+                name: "Taj Lake Palace",
+                location: "Udaipur, Rajasthan",
+                region: "rajasthan",
+                price: 35000,
+                rating: 5,
+                reviews: 420,
+                image: "https://i.ytimg.com/vi/9o57q8KMbPc/sddefault.jpg",
+                type: "Palace",
+                amenities: ["Lake View", "Spa", "Fine Dining"],
+                description: "Floating like a jewel on Lake Pichola, this 18th-century palace offers luxurious rooms with lake views, a spa, and fine dining. Once the summer palace of the Maharana, it's now a world-renowned luxury hotel."
+            },
+            {
+                id: 2,
+                name: "The Oberoi Amarvilas",
+                location: "Agra, Uttar Pradesh",
+                region: "up",
+                price: 28500,
+                rating: 4.7,
+                reviews: 380,
+                image: "https://weddingsbyneerajkamra.com/uploads/BlogPictureshow-much-does-a-taj-lake-palace-udaipur-destination-wedding-cost/default/taj-lake-palace-udaipur-wedding-cost.jpg",
+                type: "Heritage",
+                amenities: ["Taj View", "Pool", "Luxury"],
+                description: "Just 600 meters from the Taj Mahal, this luxury hotel offers stunning views of the iconic monument from most rooms. Features include Mughal-inspired architecture, lush gardens, and a world-class spa."
+            },
+            {
+                id: 3,
+                name: "Kumarakom Lake Resort",
+                location: "Kerala",
+                region: "kerala",
+                price: 22000,
+                rating: 5,
+                reviews: 310,
+                image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Eco",
+                amenities: ["Backwaters", "Ayurveda", "Villas"],
+                description: "Set on the banks of Vembanad Lake, this eco-friendly resort offers traditional Keralan villas, Ayurvedic spa treatments, and serene backwater views. Perfect for a peaceful retreat."
+            },
+            {
+                id: 4,
+                name: "The Leela Palace",
+                location: "Udaipur, Rajasthan",
+                region: "rajasthan",
+                price: 32000,
+                rating: 5,
+                reviews: 290,
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Luxury",
+                amenities: ["Lake View", "Spa", "Private Pool"],
+                description: "Inspired by the grandeur of Rajasthan's palaces, this hotel features ornate architecture, landscaped gardens, and panoramic views of Lake Pichola. Many suites include private pools."
+            },
+            {
+                id: 5,
+                name: "Wildflower Hall",
+                location: "Shimla, Himachal",
+                region: "himachal",
+                price: 26500,
+                rating: 4.5,
+                reviews: 210,
+                image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Mountain",
+                amenities: ["Himalayan View", "Spa", "Luxury"],
+                description: "Perched at 8,000 feet in the Himalayas, this former residence of Lord Kitchener offers colonial charm with modern luxury. Enjoy breathtaking mountain views, a spa, and outdoor activities."
+            },
+            {
+                id: 6,
+                name: "Taj Falaknuma Palace",
+                location: "Hyderabad",
+                region: "maharashtra",
+                price: 38000,
+                rating: 5,
+                reviews: 340,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Palace",
+                amenities: ["Historic", "Fine Dining", "Pool"],
+                description: "Once the royal guesthouse of the Nizam of Hyderabad, this palace features Italian marble staircases, Venetian chandeliers, and a 101-seat dining table. Offers butler service and palace tours."
+            },
+            {
+                id: 7,
+                name: "The Taj Mahal Palace",
+                location: "Mumbai",
+                region: "maharashtra",
+                price: 42000,
+                rating: 5,
+                reviews: 450,
+                image: "https://www.outthere.travel/wp-content/uploads/2020/12/Taj-Mahal-Palace-1.jpg",
+                type: "Iconic",
+                amenities: ["Sea View", "Luxury", "Historic"],
+                description: "An iconic Mumbai landmark since 1903, this hotel blends Indian and European architectural styles. Features include a rooftop pool with Gateway of India views and award-winning restaurants."
+            },
+            {
+                id: 8,
+                name: "The Leela Kovalam",
+                location: "Kerala",
+                region: "kerala",
+                price: 24500,
+                rating: 4.5,
+                reviews: 230,
+                image: "https://images.unsplash.com/photo-1600712243809-7a3dd4e68fff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Beach",
+                amenities: ["Beachfront", "Ayurveda", "Cliff View"],
+                description: "Set on a cliff overlooking the Arabian Sea, this resort offers private beach access, Ayurvedic treatments, and stunning sunset views. The architecture reflects traditional Keralan style."
+            },
+            {
+                id: 9,
+                name: "The Oberoi Udaivilas",
+                location: "Udaipur, Rajasthan",
+                region: "rajasthan",
+                price: 45000,
+                rating: 5,
+                reviews: 360,
+                image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/48812893.jpg?k=a034ea2f5c5431b95bedb68ac0aaa9507f6d2ba261a3182554b1dc81b4ab0f52&o=&hp=1",
+                type: "Palace",
+                amenities: ["Lake View", "Private Pool", "Luxury"],
+                description: "Spread across 50 acres on the banks of Lake Pichola, this luxury hotel features domed pavilions, courtyards, and private pools. Many rooms have direct lake access."
+            },
+            {
+                id: 10,
+                name: "Taj Exotica Resort & Spa",
+                location: "Goa",
+                region: "goa",
+                price: 18500,
+                rating: 4.8,
+                reviews: 280,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Beach",
+                amenities: ["Beachfront", "Spa", "Golf"],
+                description: "Set on 56 acres along Benaulim Beach, this resort features Portuguese-Goan architecture, a championship golf course, and an award-winning spa with Ayurvedic treatments."
+            },
+            {
+                id: 11,
+                name: "The Tamara Coorg",
+                location: "Coorg, Karnataka",
+                region: "karnataka",
+                price: 19500,
+                rating: 4.6,
+                reviews: 190,
+                image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Eco",
+                amenities: ["Coffee Estate", "Spa", "Nature"],
+                description: "Nestled in a 180-acre coffee and spice plantation, this eco-luxury resort offers villas with private decks overlooking the Western Ghats. Features include plantation walks and spa treatments."
+            },
+            {
+                id: 12,
+                name: "The Khyber Himalayan Resort & Spa",
+                location: "Gulmarg, Kashmir",
+                region: "kashmir",
+                price: 22500,
+                rating: 4.7,
+                reviews: 240,
+                image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                type: "Mountain",
+                amenities: ["Ski-in/Ski-out", "Spa", "Adventure"],
+                description: "Located in the heart of Gulmarg's ski area, this luxury resort offers direct access to ski slopes. Features include a heated indoor pool, spa with Kashmiri treatments, and stunning Himalayan views."
+            }
+        ];
+
+        // DOM Elements
+        const mainPage = document.getElementById('mainPage');
+        const detailPage = document.getElementById('detailPage');
+        const hotelContainer = document.getElementById('hotelContainer');
+        const hotelDetail = document.getElementById('hotelDetail');
+        const pagination = document.getElementById('pagination');
+        const backButton = document.getElementById('backButton');
+        const applyFilters = document.getElementById('applyFilters');
+        const resetFilters = document.getElementById('resetFilters');
+        const destinationFilter = document.getElementById('destinationFilter');
+        const priceFilter = document.getElementById('priceFilter');
+        const ratingFilters = document.querySelectorAll('.rating-filter');
+
+        // Pagination variables
+        const hotelsPerPage = 6;
+        let currentPage = 1;
+        let filteredHotels = [...hotels];
+
+        // Initialize the page
+        function init() {
+            showPage(mainPage);
+            renderHotels();
+            renderPagination();
+            
+            // Event listeners
+            applyFilters.addEventListener('click', applyHotelFilters);
+            resetFilters.addEventListener('click', resetHotelFilters);
+            backButton.addEventListener('click', () => {
+                showPage(mainPage);
+            });
+        }
+
+        // Show specific page
+        function showPage(page) {
+            document.querySelectorAll('.hotel-page').forEach(p => {
+                p.style.display = 'none';
+            });
+            page.style.display = 'block';
+        }
+
+        // Render hotel cards
+        function renderHotels() {
+            hotelContainer.innerHTML = '';
+            
+            const start = (currentPage - 1) * hotelsPerPage;
+            const end = start + hotelsPerPage;
+            const paginatedHotels = filteredHotels.slice(start, end);
+            
+            if (paginatedHotels.length === 0) {
+                hotelContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <h4>No hotels found matching your criteria</h4>
+                        <p>Try adjusting your filters</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            paginatedHotels.forEach(hotel => {
+                const stars = Array.from({ length: 5 }, (_, i) => 
+                    i < Math.floor(hotel.rating) ? 
+                    '<i class="fas fa-star"></i>' : 
+                    (i < hotel.rating ? '<i class="fas fa-star-half-alt"></i>' : '<i class="far fa-star"></i>')
+                ).join('');
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.innerHTML = `
+                    <div class="hotel-card">
+                        <div class="hotel-img">
+                            <img src="${hotel.image}" alt="${hotel.name}" onerror="this.src='https://via.placeholder.com/800x600?text=Hotel+Image'">
+                            <div class="hotel-badge ${hotel.type === 'Eco' ? 'eco-badge' : ''}">${hotel.type}</div>
+                        </div>
+                        <div class="hotel-body">
+                            <h3 class="hotel-title">${hotel.name}</h3>
+                            <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> ${hotel.location}</p>
+                            <div class="rating">
+                                ${stars}
+                                <span>${hotel.rating} (${hotel.reviews} reviews)</span>
+                            </div>
+                            <div class="amenities">
+                                ${hotel.amenities.map(a => `<span class="amenity">${a}</span>`).join('')}
+                            </div>
+                            <div class="price-container">
+                                <div class="price">₹${hotel.price.toLocaleString('en-IN')} <span>/ night</span></div>
+                                <button class="btn btn-primary" onclick="showHotelDetail(${hotel.id})">Book</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                hotelContainer.appendChild(card);
+            });
+        }
+
+        // Render pagination
+        function renderPagination() {
+            pagination.innerHTML = '';
+            const pageCount = Math.ceil(filteredHotels.length / hotelsPerPage);
+            
+            if (pageCount <= 1) return;
+            
+            // Previous button
+            pagination.innerHTML += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                </li>
+            `;
+            
+            // Page numbers
+            for (let i = 1; i <= pageCount; i++) {
+                pagination.innerHTML += `
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                    </li>
+                `;
+            }
+            
+            // Next button
+            pagination.innerHTML += `
+                <li class="page-item ${currentPage === pageCount ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                </li>
+            `;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            renderHotels();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Apply filters
+        function applyHotelFilters() {
+            const destination = destinationFilter.value;
+            const priceRange = priceFilter.value;
+            const selectedRatings = Array.from(ratingFilters)
+                .filter(r => r.checked)
+                .map(r => parseFloat(r.value));
+            
+            filteredHotels = hotels.filter(hotel => {
+                // Destination filter
+                if (destination !== 'all' && hotel.region !== destination) {
+                    return false;
+                }
+                
+                // Price filter
+                if (priceRange !== 'all') {
+                    const [min, max] = priceRange === '50000+' ? 
+                        [50000, Infinity] : 
+                        priceRange.split('-').map(Number);
+                    
+                    if (hotel.price < min || (max && hotel.price > max)) {
+                        return false;
+                    }
+                }
+                
+                // Rating filter
+                if (selectedRatings.length > 0) {
+                    if (!selectedRatings.some(r => hotel.rating >= r)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            currentPage = 1;
+            renderHotels();
+            renderPagination();
+        }
+
+        // Reset filters
+        function resetHotelFilters() {
+            destinationFilter.value = 'all';
+            priceFilter.value = 'all';
+            ratingFilters.forEach(r => r.checked = false);
+            filteredHotels = [...hotels];
+            currentPage = 1;
+            renderHotels();
+            renderPagination();
+        }
+
+        // Show hotel detail
+        function showHotelDetail(id) {
+            const hotel = hotels.find(h => h.id === id);
+            if (!hotel) return;
+            
+            const stars = Array.from({ length: 5 }, (_, i) => 
+                i < Math.floor(hotel.rating) ? 
+                '<i class="fas fa-star"></i>' : 
+                (i < hotel.rating ? '<i class="fas fa-star-half-alt"></i>' : '<i class="far fa-star"></i>')
+            ).join('');
+            
+            hotelDetail.innerHTML = `
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <img src="${hotel.image}" class="card-img-top" alt="${hotel.name}" style="height: 400px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/1200x800?text=Hotel+Image'">
+                        <div class="card-body">
+                            <h2 class="card-title">${hotel.name}</h2>
+                            <p class="text-muted"><i class="fas fa-map-marker-alt"></i> ${hotel.location}</p>
+                            <div class="mb-3">
+                                ${stars}
+                                <span class="ms-2">${hotel.rating} (${hotel.reviews} reviews)</span>
+                            </div>
+                            <p class="card-text">${hotel.description}</p>
+                            <div class="amenities mb-4">
+                                ${hotel.amenities.map(a => `<span class="amenity">${a}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card sticky-top" style="top: 20px;">
+                        <div class="card-body">
+                            <h4 class="card-title">Book Your Stay</h4>
+                            <div class="price mb-3">
+                                ₹${hotel.price.toLocaleString('en-IN')} <span>/ night</span>
+                            </div>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Check-in</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Check-out</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Guests</label>
+                                    <select class="form-select">
+                                        <option>1 Adult</option>
+                                        <option>2 Adults</option>
+                                        <option>Family (2+2)</option>
+                                        <option>Group (4+)</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary w-100">Book Now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            showPage(detailPage);
+        }
+
+        // Make functions global for HTML onclick
+        window.changePage = changePage;
+        window.showHotelDetail = showHotelDetail;
+
+        // Initialize the app
+        init();
+    </script>
+</body>
+</html>

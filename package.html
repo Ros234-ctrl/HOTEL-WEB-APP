@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incredible India Tours | 2025 Premium Packages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center/cover;
+            opacity: 0.15;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        /* Packages Grid */
+        .packages-section {
+            padding: 5rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: #6b7280;
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Package Card */
+        .package-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .package-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        .package-image {
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .package-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .package-card:hover .package-image img {
+            transform: scale(1.05);
+        }
+        
+        .package-content {
+            padding: 1.5rem;
+        }
+        
+        .package-header {
+            margin-bottom: 1rem;
+        }
+        
+        .package-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .package-duration {
+            display: flex;
+            align-items: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .package-duration i {
+            margin-right: 0.5rem;
+        }
+        
+        .package-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stars {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        .review-count {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        .package-features {
+            margin: 1.5rem 0;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature-list li i {
+            color: var(--success);
+            margin-right: 0.75rem;
+            margin-top: 0.2rem;
+            font-size: 0.875rem;
+        }
+        
+        .package-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .package-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .price-duration {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn i {
+            margin-left: 0.5rem;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 0.5rem;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: white;
+            color: var(--dark);
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn.active, .page-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Incredible India</h1>
+            <p>2025 Premium Collection of India's Most Beautiful Destinations</p>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Discover India's Treasures</h2>
+                <p>Experience the diversity of India through our carefully curated premium tours</p>
+            </div>
+            
+            <div class="packages-grid" id="packages-container">
+                <!-- Package 1 - Himalayan -->
+                <div class="package-card">
+                    <div class="package-badge">BEST SELLER</div>
+                    <div class="package-image">
+                        <img src="https://thumbs.dreamstime.com/b/majestic-himalayan-mountain-range-sunrise-vibrant-colors-snow-capped-peaks-majestic-himalayan-mountain-range-sunrise-vibrant-355730869.jpg" alt="Himalayan Adventure">
+                    </div>
+                    <div class="package-content">
+                        <div class="package-header">
+                            <h3 class="package-title">Himalayan Majesty Tour</h3>
+                            <div class="package-duration">
+                                <i class="far fa-calendar-alt"></i> 8 Days / 7 Nights
+                            </div>
+                            <div class="package-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="review-count">(128 reviews)</span>
+                            </div>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> Luxury stays in Shimla & Manali</li>
+                                <li><i class="fas fa-check"></i> Private guided treks</li>
+                                <li><i class="fas fa-check"></i> White water rafting experience</li>
+                                <li><i class="fas fa-check"></i> Sunrise at Rohtang Pass</li>
+                                <li><i class="fas fa-check"></i> All adventure equipment included</li>
+                            </ul>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">₹12,000</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <button class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Package 2 - Kerala -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnzdJ7Wj1Yxy1pctvwUOeSGrDQs9Lq5w_dQ&s" alt="Kerala Backwaters">
+                    </div>
+                    <div class="package-content">
+                        <div class="package-header">
+                            <h3 class="package-title">Kerala Backwaters Bliss</h3>
+                            <div class="package-duration">
+                                <i class="far fa-calendar-alt"></i> 8 Days / 7 Nights
+                            </div>
+                            <div class="package-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="review-count">(96 reviews)</span>
+                            </div>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> Premium houseboat with private crew</li>
+                                <li><i class="fas fa-check"></i> Authentic Ayurvedic spa treatments</li>
+                                <li><i class="fas fa-check"></i> All meals featuring Kerala cuisine</li>
+                                <li><i class="fas fa-check"></i> Private Kathakali dance performance</li>
+                                <li><i class="fas fa-check"></i> Guided plantation tours</li>
+                            </ul>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">₹16,500</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <button class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Package 3 - Rajasthan -->
+                <div class="package-card">
+                    <div class="package-badge">CULTURAL</div>
+                    <div class="package-image">
+                        <img src="https://www.holidaymonk.com/wp-content/uploads/2024/09/Royal-Rajasthan-Experience-Tour-Package-1.webp" alt="Rajasthan Heritage">
+                    </div>
+                    <div class="package-content">
+                        <div class="package-header">
+                            <h3 class="package-title">Rajasthan Royal Experience</h3>
+                            <div class="package-duration">
+                                <i class="far fa-calendar-alt"></i> 7 Days / 6 Nights
+                            </div>
+                            <div class="package-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="review-count">(64 reviews)</span>
+                            </div>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> Heritage palace stays</li>
+                                <li><i class="fas fa-check"></i> Private Taj Mahal tour at sunrise</li>
+                                <li><i class="fas fa-check"></i> Camel safari in Thar Desert</li>
+                                <li><i class="fas fa-check"></i> Traditional folk dance performances</li>
+                                <li><i class="fas fa-check"></i> All monument entrances included</li>
+                            </ul>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">₹8,000</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <button class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Package 4 - Goa -->
+                <div class="package-card">
+                    <div class="package-badge">BEACH</div>
+                    <div class="package-image">
+                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Goa Beaches">
+                    </div>
+                    <div class="package-content">
+                        <div class="package-header">
+                            <h3 class="package-title">Goa Beach Retreat</h3>
+                            <div class="package-duration">
+                                <i class="far fa-calendar-alt"></i> 6 Days / 5 Nights
+                            </div>
+                            <div class="package-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="review-count">(87 reviews)</span>
+                            </div>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> Luxury beachfront villa</li>
+                                <li><i class="fas fa-check"></i> Private yacht sunset cruise</li>
+                                <li><i class="fas fa-check"></i> Seafood cooking class</li>
+                                <li><i class="fas fa-check"></i> Portuguese heritage walks</li>
+                                <li><i class="fas fa-check"></i> Ayurvedic massage sessions</li>
+                            </ul>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">₹5,000</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <button class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package 5 - Rishikesh -->
+<div class="package-card">
+    <div class="package-badge">ADVENTURE</div>
+    <div class="package-image">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/0d/31/ba/view-of-the-resort.jpg" alt="Rishikesh Adventure">
+    </div>
+    <div class="package-content">
+        <div class="package-header">
+            <h3 class="package-title">Rishikesh Adventure Retreat</h3>
+            <div class="package-duration">
+                <i class="far fa-calendar-alt"></i> 6 Days / 5 Nights
+            </div>
+            <div class="package-rating">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="review-count">(68 reviews)</span>
+            </div>
+        </div>
+        <div class="package-features">
+            <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Riverside luxury camp stay</li>
+                <li><i class="fas fa-check"></i> White water rafting on Ganges</li>
+                <li><i class="fas fa-check"></i> Yoga sessions with Ganga view</li>
+                <li><i class="fas fa-check"></i> Cliff jumping and rappelling</li>
+                <li><i class="fas fa-check"></i> Evening Ganga Aarti experience</li>
+            </ul>
+        </div>
+        <div class="package-footer">
+            <div>
+                <div class="package-price">₹20,000</div>
+                <div class="price-duration">per person</div>
+            </div>
+            <button class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+                
+                <!-- Package 5 - Varanasi -->
+                <div class="package-card">
+                    <div class="package-badge">SPIRITUAL</div>
+                    <div class="package-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjYVv6JGsYZ57c--no2YqfSG-lPIBZl3I6hQ&s" alt="Varanasi Ghats">
+                    </div>
+                    <div class="package-content">
+                        <div class="package-header">
+                            <h3 class="package-title">Varanasi Sacred Journey</h3>
+                            <div class="package-duration">
+                                <i class="far fa-calendar-alt"></i> 5 Days / 4 Nights
+                            </div>
+                            <div class="package-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="review-count">(42 reviews)</span>
+                            </div>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> Ganges riverfront heritage hotel</li>
+                                <li><i class="fas fa-check"></i> Private boat sunrise ceremony</li>
+                                <li><i class="fas fa-check"></i> Guided temple tours</li>
+                                <li><i class="fas fa-check"></i> Evening Ganga Aarti experience</li>
+                                <li><i class="fas fa-check"></i> Sarnath Buddhist site visit</li>
+                            </ul>
+                        </div>
+                        <div class="package-footer">
+                            <div>
+                                <div class="package-price">₹13,500</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <button class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Package data for pagination
+        const packagesData = [
+            // Page 2 packages
+            {
+                title: "Ladakh Mountain Adventure",
+                duration: "10 Days / 9 Nights",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3I0i_bdcQqXJbjWLhAzFTgXPynmzcQo815Q&s",
+                price: "₹15,999",
+                features: [
+                    "Pangong Lake luxury camp stay",
+                    "Nubra Valley camel safari",
+                    "Private monastery visits",
+                    "All permits included",
+                    "Expert mountain guide"
+                ],
+                badge: "ADVENTURE"
+            },
+            {
+                title: "Kashmir Valley Retreat",
+                duration: "7 Days / 6 Nights",
+                image: "https://images.squarespace-cdn.com/content/v1/645be49ffdd2e54fd759ad70/1683743934630-890NTYGO0SIW63IRWHIS/unsplash-image-KRIGA7iUN08.jpg",
+                price: "₹9,500",
+                features: [
+                    "Houseboat stay on Dal Lake",
+                    "Private shikara rides",
+                    "Gulmarg gondola tickets",
+                    "Apple orchard visits",
+                    "Traditional Wazwan feast"
+                ],
+                badge: "HONEYMOON"
+            },
+            {
+                title: "Andaman Island Escape",
+                duration: "6 Days / 5 Nights",
+                image: "https://miro.medium.com/v2/resize:fit:759/1*TqFGEvVa7fQvnKaoDBuEhw.jpeg",
+                price: "₹5,200",
+                features: [
+                    "Beachfront luxury resort",
+                    "Private snorkeling trips",
+                    "Cellular Jail light show",
+                    "Radhanagar Beach visit",
+                    "All ferry transfers included"
+                ],
+                badge: "BEACH"
+            },
+            {
+                title: "Mysore Heritage Tour",
+                duration: "5 Days / 4 Nights",
+                image: "https://static.toiimg.com/photo/51680032.cms",
+                price: "₹10,000",
+                features: [
+                    "Mysore Palace private tour",
+                    "Srirangapatna heritage walk",
+                    "Chamundi Hill sunrise visit",
+                    "Traditional silk shopping",
+                    "Authentic Karnataka cuisine"
+                ],
+                badge: "CULTURAL"
+            },
+            {
+                title: "Assam Wildlife Safari",
+                duration: "7 Days / 6 Nights",
+                image: "https://i0.wp.com/kaziranganationalparkassam.in/wp-content/uploads/2019/02/img-20190222-wa0010.jpg?fit=800%2C463&ssl=1",
+                price: "₹15,000",
+                features: [
+                    "Kaziranga jeep safaris",
+                    "River cruise on Brahmaputra",
+                    "Tea estate stay",
+                    "Rhino spotting tours",
+                    "Local Bihu dance performance"
+                ],
+                badge: "WILDLIFE"
+            }
+        ];
+
+        // Pagination functionality
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get page number (1, 2, or 3)
+                const pageNum = parseInt(this.textContent);
+                
+                // Clear existing packages (if not page 1)
+                if(pageNum !== 1) {
+                    document.getElementById('packages-container').innerHTML = '';
+                    
+                    // Add packages for this page
+                    packagesData.forEach(pkg => {
+                        const packageHTML = `
+                            <div class="package-card">
+                                ${pkg.badge ? `<div class="package-badge">${pkg.badge}</div>` : ''}
+                                <div class="package-image">
+                                    <img src="${pkg.image}" alt="${pkg.title}">
+                                </div>
+                                <div class="package-content">
+                                    <div class="package-header">
+                                        <h3 class="package-title">${pkg.title}</h3>
+                                        <div class="package-duration">
+                                            <i class="far fa-calendar-alt"></i> ${pkg.duration}
+                                        </div>
+                                        <div class="package-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                            <span class="review-count">(${Math.floor(Math.random() * 100) + 50} reviews)</span>
+                                        </div>
+                                    </div>
+                                    <div class="package-features">
+                                        <ul class="feature-list">
+                                            ${pkg.features.map(feat => `<li><i class="fas fa-check"></i> ${feat}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    <div class="package-footer">
+                                        <div>
+                                            <div class="package-price">${pkg.price}</div>
+                                            <div class="price-duration">per person</div>
+                                        </div>
+                                        <button class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        document.getElementById('packages-container').insertAdjacentHTML('beforeend', packageHTML);
+                    });
+                } else {
+                    // Reload page to show original packages
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
